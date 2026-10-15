@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Speech synthesis | CoCreate</title>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="stylesheet" href="../dist/CoCreate-speech-synthesis.css" />
+	</head>
+	<body>
+		<main id="page-wrapper">
+			<h1>Speech synthesis</h1>
+
+			<section>
+				<h2>Query an element</h2>
+				<p id="speech-example">
+					CoCreate Speech Synthesis can read text from a selected element.
+				</p>
+				<button
+					type="button"
+					speech-synthesis
+					speech-synthesis-query="$document #speech-example">
+					<span>Read example</span>
+					<span>Stop reading</span>
+				</button>
+			</section>
+
+			<section>
+				<h2>Literal attribute value</h2>
+				<button
+					type="button"
+					speech-synthesis="Welcome to CoCreate"
+					speech-synthesis-lang="en-US"
+					speech-synthesis-rate="1"
+					speech-synthesis-pitch="1"
+					speech-synthesis-volume="1">
+					Speak literal text
+				</button>
+			</section>
+
+			<section>
+				<h2>JavaScript object options</h2>
+				<button id="speech-object-example" type="button">
+					Speak using JavaScript
+				</button>
+				<pre><code>CoCreate.speechSynthesis.speak(
+	"This example uses a JavaScript options object.",
+	{
+		lang: "en-US",
+		rate: 1,
+		pitch: 1,
+		volume: 1
+	}
+);</code></pre>
+			</section>
+
+			<section>
+				<h2>Dynamically initialized element</h2>
+				<button id="add-speech-trigger" type="button">
+					Add speech trigger
+				</button>
+				<div id="dynamic-example"></div>
+			</section>
+		</main>
+
+		<script src="https://CoCreate.app/dist/CoCreate.js"></script>
+		<script src="../dist/CoCreate-speech-synthesis.js"></script>
+		<script>
+			document
+				.getElementById("speech-object-example")
+				.addEventListener("click", () => {
+					CoCreate.speechSynthesis.speak(
+						"This example uses a JavaScript options object.",
+						{
+							lang: "en-US",
+							rate: 1,
+							pitch: 1,
+							volume: 1
+						}
+					);
+				});
+
+			document
+				.getElementById("add-speech-trigger")
+				.addEventListener("click", () => {
+					document.getElementById("dynamic-example").innerHTML =
+						'<button type="button" speech-synthesis="Observer initialized this new speech trigger.">Speak dynamic text</button>';
+				});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "name": "@cocreate/speech-synthesis",
+  "version": "1.0.0",
+  "description": "Declarative text-to-speech for CoCreate using the browser SpeechSynthesis API.",
+  "keywords": [
+    "speech-synthesis",
+    "text-to-speech",
+    "tts",
+    "web-speech-api",
+    "accessibility",
+    "low-code",
+    "realtime",
+    "realtime-framework",
+    "collaboration",
+    "shared-editing",
+    "html5-framework",
+    "javascript-framework"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "webpack --config webpack.config.js",
+    "build": "webpack --mode=production --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoCreate-app/CoCreate-speech-synthesis.git"
+  },
+  "author": "CoCreate LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CoCreate-app/CoCreate-speech-synthesis/issues"
+  },
+  "homepage": "https://cocreate.app/docs/speech-synthesis",
+  "funding": {
+    "type": "GitHub Sponsors ❤",
+    "url": "https://github.com/sponsors/CoCreate-app"
+  },
+  "main": "./src/index.js",
+  "dependencies": {
+    "@cocreate/observer": "^1.23.0",
+    "@cocreate/utils": "^1.54.0"
+  },
+  "devDependencies": {
+    "@cocreate/webpack": "^1.9.0"
+  },
+  "allowScripts": {
+    "@cocreate/observer@1.19.0": true,
+    "@cocreate/utils@1.42.2": true,
+    "@cocreate/webpack@1.4.3": true
+  }
+}

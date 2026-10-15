@@ -1,0 +1,11 @@
+[speech-synthesis] i:last-child {
+	display: none;
+}
+
+[speech-synthesis][speech-synthesis-active="true"] i:first-child {
+	display: none;
+}
+
+[speech-synthesis][speech-synthesis-active="true"] i:last-child {
+	display: unset;
+}
