@@ -123,9 +123,8 @@
 
 			<h1
 				class="max-width:500px margin:20px_10px line-height:1.5 font-size:16px font-weight:100">
-				Toggle any html element to view in speech-synthesis mode. Easy
-				configuration and targeting using the speech-synthesis and target
-				attribute.
+				Use speech-synthesis-query to select text. Click the trigger to speak,
+				then click again to cancel.
 			</h1>
 			<div id="speech-synthesis-section" class="display:flex flex-wrap:wrap">
 				<div
@@ -187,7 +186,7 @@
                                       &lt;/style&gt;
                                       &lt;section&gt;
                                         &lt;h2&gt;Only Target&lt;/h2&gt;
-                                        &lt;button speech-synthesis speech-synthesis-selector=&quot;#example2&quot;&gt;With Attr Target&lt;/button&gt;
+                                        &lt;button speech-synthesis-query=&quot;$document #example2&quot;&gt;Speak target&lt;/button&gt;
                                         &lt;button speech-synthesis &gt;WithOut Target&lt;/button&gt;
                                       &lt;/section&gt;
                                       &lt;section&gt;
@@ -232,10 +231,18 @@
 									>boolean</span
 								>
 								<span class="cocreate-badge danger"
-									>required</span
+									>optional</span
 								>
 							</h4>
-							<p>true</p>
+							<p>Enables the component and can contain literal text. A speech-synthesis-query attribute can initialize a trigger without it.</p>
+						</li>
+						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+							<h4><span>speech-synthesis-query</span><span class="cocreate-badge success">selector</span></h4>
+							<p>CoCreate query for the text or value to speak. This attribute alone initializes a trigger.</p>
+						</li>
+						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+							<h4><span>speech-synthesis-state</span><span class="cocreate-badge success">start / pause / resume / cancel / end</span></h4>
+							<p>Set a command on the trigger to control speech. The component updates the state as the browser reports lifecycle events.</p>
 						</li>
 					</ul>
 				</div>

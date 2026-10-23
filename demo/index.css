@@ -48,6 +48,15 @@ button:focus-visible {
 	background: #3c8747;
 }
 
+.active-label,
+[speech-synthesis-active="true"] .idle-label {
+	display: none;
+}
+
+[speech-synthesis-active="true"] .active-label {
+	display: inline;
+}
+
 pre {
 	overflow: auto;
 	padding: 16px;

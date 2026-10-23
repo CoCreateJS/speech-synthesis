@@ -17,12 +17,16 @@
 					CoCreate Speech Synthesis can read text from a selected element.
 				</p>
 				<button
+					id="read-example"
 					type="button"
 					speech-synthesis
 					speech-synthesis-query="$document #speech-example">
-					<span>Read example</span>
-					<span>Stop reading</span>
+					<span class="idle-label">Read example</span>
+					<span class="active-label">Stop reading</span>
 				</button>
+				<button id="pause-example" type="button">Pause</button>
+				<button id="resume-example" type="button">Resume</button>
+				<button id="cancel-example" type="button">Cancel</button>
 			</section>
 
 			<section>
@@ -85,6 +89,11 @@
 				.addEventListener("click", () => {
 					document.getElementById("dynamic-example").innerHTML =
 						'<button type="button" speech-synthesis="Observer initialized this new speech trigger.">Speak dynamic text</button>';
+				});
+
+			for (const command of ["pause", "resume", "cancel"])
+				document.getElementById(`${command}-example`).addEventListener("click", () => {
+					document.getElementById("read-example").setAttribute("speech-synthesis-state", command);
 				});
 		</script>
 	</body>

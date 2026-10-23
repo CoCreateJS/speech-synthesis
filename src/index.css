@@ -1,11 +1,14 @@
-[speech-synthesis] i:last-child {
+[speech-synthesis] i:last-child,
+[speech-synthesis-query] i:last-child {
 	display: none;
 }
 
-[speech-synthesis][speech-synthesis-active="true"] i:first-child {
+[speech-synthesis][speech-synthesis-active="true"] i:first-child,
+[speech-synthesis-query][speech-synthesis-active="true"] i:first-child {
 	display: none;
 }
 
-[speech-synthesis][speech-synthesis-active="true"] i:last-child {
+[speech-synthesis][speech-synthesis-active="true"] i:last-child,
+[speech-synthesis-query][speech-synthesis-active="true"] i:last-child {
 	display: unset;
 }
