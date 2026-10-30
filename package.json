@@ -19,6 +19,59 @@
   "publishConfig": {
     "access": "public"
   },
+  "cocreate": {
+    "environment": [
+      "client"
+    ],
+    "interface": {
+      "schemaVersion": 1,
+      "summary": "Declarative text-to-speech for CoCreate using the browser SpeechSynthesis API.",
+      "source": "src/index.js",
+      "declarative": {
+        "selectors": [
+          "[speech-synthesis-query], [speech-synthesis]"
+        ],
+        "attributes": [
+          {
+            "name": "actions"
+          },
+          {
+            "name": "aria-disabled"
+          },
+          {
+            "name": "speech-synthesis"
+          },
+          {
+            "name": "speech-synthesis-active"
+          },
+          {
+            "name": "speech-synthesis-lang"
+          },
+          {
+            "name": "speech-synthesis-query"
+          },
+          {
+            "name": "speech-synthesis-state"
+          },
+          {
+            "name": "speech-synthesis-voice"
+          }
+        ]
+      },
+      "api": {
+        "exports": [
+          "cancel",
+          "getVoices",
+          "init",
+          "pause",
+          "resume",
+          "speak",
+          "start",
+          "toggle"
+        ]
+      }
+    }
+  },
   "scripts": {
     "start": "webpack --config webpack.config.js",
     "build": "webpack --mode=production --config webpack.config.js",
