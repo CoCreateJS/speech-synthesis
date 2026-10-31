@@ -13,7 +13,7 @@ Fork the [project on Github](https://github.com/CoCreate-app/CoCreate-speech-syn
 ```
 git speech-synthesis https://github.com/contributor/CoCreate-speech-synthesis.git
 cd CoCreate-speech-synthesis
-git remote add upstream https://gitlab.com/cocreatejs/CoCreate-speech-synthesis.git
+git remote add upstream https://github.com/cocreatejs/CoCreate-speech-synthesis.git
 ```
 
 ## Create a Topic Branch
