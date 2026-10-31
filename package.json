@@ -79,14 +79,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CoCreate-app/CoCreate-speech-synthesis.git"
+    "url": "git+https://github.com/CoCreateJS/CoCreate-speech-synthesis.git"
   },
   "author": "CoCreate LLC",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CoCreate-app/CoCreate-speech-synthesis/issues"
+    "url": "https://github.com/CoCreateJS/CoCreate-speech-synthesis/issues"
   },
-  "homepage": "https://cocreate.app/docs/speech-synthesis",
+  "homepage": "https://CoCreateJS.com/docs/speech-synthesis",
   "funding": {
     "type": "GitHub Sponsors ❤",
     "url": "https://github.com/sponsors/CoCreate-app"

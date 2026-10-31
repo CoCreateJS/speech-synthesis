@@ -1,6 +1,6 @@
 /*!
  * CoCreate speech synthesis — declarative browser text-to-speech.
- * https://cocreate.app
+ * https://CoCreateJS.com
  * Released under the MIT license
  */
 import observer from "@cocreate/observer";
