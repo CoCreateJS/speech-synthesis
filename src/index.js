@@ -3,6 +3,12 @@
  * https://CoCreateJS.com
  * Released under the MIT license
  */
+
+/**
+ * Client-side text-to-speech API and declarative interface.
+ * @module speech-synthesis
+ * @environment client
+ */
 import observer from "@cocreate/observer";
 import actions from "@cocreate/actions";
 import { queryElements } from "@cocreate/utils";
@@ -40,6 +46,14 @@ function numberAttribute(element, name, fallback, min, max) {
 	return Number.isFinite(value) ? Math.min(max, Math.max(min, value)) : fallback;
 }
 
+/**
+ * Returns the voices currently available from the browser speech engine.
+ *
+ * @function getVoices
+ * @public
+ * @environment client
+ * @returns {SpeechSynthesisVoice[]} Available speech synthesis voices.
+ */
 function getVoices() {
 	return window.speechSynthesis?.getVoices() || [];
 }
@@ -100,6 +114,14 @@ function finish(current, state) {
 	session = undefined;
 }
 
+/**
+ * Cancels the active or pending utterance, optionally limiting cancellation to one element.
+ *
+ * @function cancel
+ * @public
+ * @environment client
+ * @param {Element} [element] - Cancel only speech associated with this element.
+ */
 function cancel(element) {
 	const current = session;
 	if ((!current || (element && current.element !== element)) && pendingElement &&
@@ -132,6 +154,18 @@ function waitFor(current, type) {
 	return new Promise((resolve, reject) => current.waiters.push({ type, resolve, reject }));
 }
 
+/**
+ * Speaks the supplied text with the selected voice and speech settings.
+ *
+ * @function speak
+ * @public
+ * @environment client
+ * @param {string} text - Text to speak.
+ * @param {Object} [options] - Speech settings such as voice, lang, rate, pitch, and volume.
+ * @param {Element} [element] - Element whose state and events represent this utterance.
+ * @param {number} [request] - Internal request token used by start().
+ * @returns {SpeechSynthesisUtterance|undefined} The utterance, when speech can start.
+ */
 function speak(text, options = {}, element, request) {
 	if (request === undefined) {
 		startRequest++;
@@ -215,6 +249,16 @@ function speak(text, options = {}, element, request) {
 	}
 }
 
+/**
+ * Resolves text from an element or explicit options and starts speaking it.
+ *
+ * @function start
+ * @public
+ * @environment client
+ * @param {Element} element - Element that supplies text and receives state and events.
+ * @param {Object} [options] - Optional text, target, voice, language, and speech settings.
+ * @returns {Promise<SpeechSynthesisUtterance|undefined>} The started utterance when available.
+ */
 function start(element, options = {}) {
 	if (!element) return Promise.resolve();
 	if (session?.element === element && !session.ended && !session.cancelled)
@@ -246,6 +290,15 @@ function start(element, options = {}) {
 	return pendingStart;
 }
 
+/**
+ * Pauses the active utterance, optionally when it belongs to the specified element.
+ *
+ * @function pause
+ * @public
+ * @environment client
+ * @param {Element} [element] - Pause only speech associated with this element.
+ * @returns {SpeechSynthesisUtterance|undefined} The active utterance, if one was paused.
+ */
 function pause(element) {
 	if (!session || (element && session.element !== element) || session.ended || session.cancelled) return;
 	if (window.speechSynthesis?.paused) return session.utterance;
@@ -253,6 +306,15 @@ function pause(element) {
 	return session.utterance;
 }
 
+/**
+ * Resumes the active paused utterance, optionally when it belongs to the specified element.
+ *
+ * @function resume
+ * @public
+ * @environment client
+ * @param {Element} [element] - Resume only speech associated with this element.
+ * @returns {SpeechSynthesisUtterance|undefined} The active utterance when it can resume.
+ */
 function resume(element) {
 	if (!session || (element && session.element !== element) || session.ended || session.cancelled) return;
 	if (!window.speechSynthesis?.paused) return;
@@ -260,6 +322,15 @@ function resume(element) {
 	return session.utterance;
 }
 
+/**
+ * Starts speech for an element or cancels its active or pending speech.
+ *
+ * @function toggle
+ * @public
+ * @environment client
+ * @param {Element} element - Element whose speech should start or be cancelled.
+ * @returns {Promise<SpeechSynthesisUtterance|undefined>} The utterance when speech starts.
+ */
 async function toggle(element) {
 	if (pendingElement === element) return cancel(element);
 	if (session?.element === element && !session.ended && !session.cancelled) return cancel(element);
@@ -276,6 +347,14 @@ function applyCommand(element) {
 	else if (command === "cancel") cancel(element);
 }
 
+/**
+ * Initializes matching elements and applies any declarative speech state command.
+ *
+ * @function init
+ * @public
+ * @environment client
+ * @param {Element|NodeList<Element>|Element[]} [elements=document.querySelectorAll(selector)] - Elements to initialize.
+ */
 function init(elements = document.querySelectorAll(selector)) {
 	if (elements.nodeType) elements = [elements];
 	for (const element of elements) {
@@ -374,4 +453,150 @@ observer.init({
 
 init();
 
+/**
+ * Supplies speech text directly or enables text discovery from the element's content.
+ *
+ * @name speech-synthesis
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {string|boolean}
+ * @example
+ * <button speech-synthesis="Hello there">Speak</button>
+ */
+
+/**
+ * Selects an element whose value or text content should be spoken.
+ *
+ * @name speech-synthesis-query
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {string}
+ * @example
+ * <button speech-synthesis-query="#announcement">Speak announcement</button>
+ */
+
+/**
+ * Sets the language used for the utterance.
+ *
+ * @name speech-synthesis-lang
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {string}
+ * @example
+ * <button speech-synthesis-lang="en-US" speech-synthesis="Hello">Speak</button>
+ */
+
+/**
+ * Selects a voice by its name or voice URI.
+ *
+ * @name speech-synthesis-voice
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {string}
+ * @example
+ * <button speech-synthesis-voice="Alex" speech-synthesis="Hello">Speak</button>
+ */
+
+/**
+ * Sets the utterance rate. Values are clamped to the range 0.1 through 10.
+ *
+ * @name speech-synthesis-rate
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {number}
+ * @default 1
+ * @example
+ * <button speech-synthesis-rate="1.2" speech-synthesis="Hello">Speak</button>
+ */
+
+/**
+ * Sets the utterance pitch. Values are clamped to the range 0 through 2.
+ *
+ * @name speech-synthesis-pitch
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {number}
+ * @default 1
+ * @example
+ * <button speech-synthesis-pitch="1.2" speech-synthesis="Hello">Speak</button>
+ */
+
+/**
+ * Sets the utterance volume. Values are clamped to the range 0 through 1.
+ *
+ * @name speech-synthesis-volume
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {number}
+ * @default 1
+ * @example
+ * <button speech-synthesis-volume="0.8" speech-synthesis="Hello">Speak</button>
+ */
+
+/**
+ * Requests a speech state command. Supported commands are start, pause, resume, and cancel.
+ *
+ * @name speech-synthesis-state
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {string}
+ * @example
+ * <button speech-synthesis-state="start" speech-synthesis="Hello">Speak</button>
+ */
+
+/**
+ * Indicates whether this element currently has an active utterance.
+ * This state attribute is managed by the module.
+ *
+ * @name speech-synthesis-active
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {boolean}
+ */
+
+/**
+ * Enables an Actions-driven control, suppressing the module's built-in click toggle.
+ *
+ * @name actions
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {string}
+ */
+
+/**
+ * Prevents the built-in click handler from starting speech when set to "true".
+ *
+ * @name aria-disabled
+ * @kind member
+ * @attribute
+ * @environment client
+ * @type {boolean}
+ * @acceptedValues true, false
+ */
+
 export default { init, start, speak, pause, resume, cancel, toggle, getVoices };
+
+/**
+ * Declarative selectors recognized by this module.
+ *
+ * @name declarative-selectors
+ * @kind member
+ * @selectors
+ * @environment client
+ * @example
+ * ```json
+ * [
+ *   "[speech-synthesis-query], [speech-synthesis]"
+ * ]
+ * ```
+ */
