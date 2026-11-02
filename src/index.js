@@ -457,8 +457,7 @@ init();
  * Supplies speech text directly or enables text discovery from the element's content.
  *
  * @name speech-synthesis
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {string|boolean}
  * @example
@@ -469,8 +468,7 @@ init();
  * Selects an element whose value or text content should be spoken.
  *
  * @name speech-synthesis-query
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {string}
  * @example
@@ -481,8 +479,7 @@ init();
  * Sets the language used for the utterance.
  *
  * @name speech-synthesis-lang
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {string}
  * @example
@@ -493,8 +490,7 @@ init();
  * Selects a voice by its name or voice URI.
  *
  * @name speech-synthesis-voice
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {string}
  * @example
@@ -505,8 +501,7 @@ init();
  * Sets the utterance rate. Values are clamped to the range 0.1 through 10.
  *
  * @name speech-synthesis-rate
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {number}
  * @default 1
@@ -518,8 +513,7 @@ init();
  * Sets the utterance pitch. Values are clamped to the range 0 through 2.
  *
  * @name speech-synthesis-pitch
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {number}
  * @default 1
@@ -531,8 +525,7 @@ init();
  * Sets the utterance volume. Values are clamped to the range 0 through 1.
  *
  * @name speech-synthesis-volume
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {number}
  * @default 1
@@ -544,8 +537,7 @@ init();
  * Requests a speech state command. Supported commands are start, pause, resume, and cancel.
  *
  * @name speech-synthesis-state
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {string}
  * @example
@@ -557,8 +549,7 @@ init();
  * This state attribute is managed by the module.
  *
  * @name speech-synthesis-active
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {boolean}
  */
@@ -567,8 +558,7 @@ init();
  * Enables an Actions-driven control, suppressing the module's built-in click toggle.
  *
  * @name actions
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {string}
  */
@@ -577,8 +567,7 @@ init();
  * Prevents the built-in click handler from starting speech when set to "true".
  *
  * @name aria-disabled
- * @kind member
- * @attribute
+ * @kind attribute
  * @environment client
  * @type {boolean}
  * @acceptedValues true, false
